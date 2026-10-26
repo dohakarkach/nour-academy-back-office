@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TailAdmin Docs — Layout Three</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-row">
+        <div class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 32 32">
+            <rect x="4" y="5" width="5" height="22" rx="2.5" />
+            <rect x="13.5" y="12" width="5" height="15" rx="2.5" />
+            <rect x="23" y="3" width="5" height="24" rx="2.5" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <strong>Nour Academy</strong><span>Dashboard</span>
+        </div>
+      </div>
+
+      <nav class="docs-nav">
+        <div class="nav-group">
+          <a href="#" class="selected">Quick Start</a>
+          <a href="#">Installation Guide</a>
+          <a href="#">Tutorials</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="menu-button" id="menuButton" aria-label="Toggle sidebar">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <label class="command-search">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="10.8" cy="10.8" r="7.2" />
+            <path d="m16.2 16.2 4.3 4.3" />
+          </svg>
+          <input type="search" placeholder="Search or type command..." />
+          <kbd><span>⌘</span> K</kbd>
+        </label>
+      </header>
+
+      <section class="page-content" aria-label="Loading content"></section>
+    </main>
+  </body>
+</html>
