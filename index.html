@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NourAdmin | Tableau de bord</title>
     <link rel="stylesheet" href="style.css" />
+    <script type="module" src="./js/app.js" defer></script>
   </head>
 
   <body>
@@ -22,17 +23,34 @@
           <strong>Nour Academy</strong>
           <span>Administration</span>
         </div>
+
+        <button class="collapse-button menu-button" id="mobile-button">
+          <svg
+            xmlns="http://w3.org"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
       </div>
 
       <nav class="docs-nav" aria-label="Navigation principale">
         <div class="nav-group">
-          <a href="#/tableau-de-bord" class="selected" aria-current="page">
+          <a href="#tableau-de-bord" class="selected" aria-current="page">
             Tableau de bord
           </a>
           <div class="decoration-line" aria-hidden="true"></div>
-          <a href="#/inscriptions">Inscriptions</a>
+          <a href="#inscriptions">Inscriptions</a>
           <div class="decoration-line" aria-hidden="true"></div>
-          <a href="#/parametres">Paramètres</a>
+          <a href="#parametres">Paramètres</a>
         </div>
       </nav>
     </aside>
