@@ -1,4 +1,5 @@
 import { renderDashboard } from "./dashboard.js";
+import { renderTable } from "./inscription.js";
 
 let menuButton = document.getElementById("menuButton");
 let sidebar = document.getElementById("sidebar");
@@ -19,9 +20,11 @@ menuButton.addEventListener("click", () => {
 
 leftArrow.addEventListener("click", () => {
     sidebar.classList.toggle("sidebar-open");
-    leftArrow.setAttribute( "aria-expanded", false);
+    leftArrow.setAttribute("aria-expanded", false);
 })
 
 const pageContent = document.querySelector("#pageContent");
 
 pageContent.innerHTML = renderDashboard();
+pageContent.appendChild(renderTable());
+

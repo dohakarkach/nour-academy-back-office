@@ -10,25 +10,54 @@ const inscriptionsSauvegardees = JSON.parse(
   localStorage.getItem("inscriptions")
 );
 
-// 4. Sélectionner le tbody dans le HTML
-const tableau = document.querySelector("#inscriptions-body");
+export function renderTable() {
+  const pageContent = document.createElement("div");
+  pageContent.classList.add("table-container");
 
-// 5. Afficher chaque inscription dans une ligne
-inscriptionsSauvegardees.forEach((inscription) => {
-  const ligne = document.createElement("tr");
+  const table = document.createElement("table");
+  table.innerHTML = `
+            <thead>
+              <tr>
+                <th>Numéro de dossier</th>
+                <th>Élève</th>
+                <th>Niveau</th>
+                <th>Cours</th>
+                <th>Téléphone du parent</th>
+                <th>Statut</th>
+                <th>Date</th>
+              </tr>
+            </thead>
 
-  ligne.innerHTML = `
-    <td>${inscription.numero}</td>
-    <td>${inscription.eleve}</td>
-    <td>${inscription.niveau}</td>
-    <td>${inscription.cours}</td>
-    <td>${inscription.telephone}</td>
-    <td>${inscription.statut}</td>
-    <td>${inscription.date}</td>
-  `;
+            <tbody id="inscriptions-body">
+              <!-- Les inscriptions seront ajoutées par JavaScript -->
+            </tbody>
+          `;
 
-  tableau.appendChild(ligne);
-});
+  const tableBody = document.createElement("tbody");
+  tableBody.id = "inscriptions-body";
+
+  inscriptionsSauvegardees.forEach((inscription) => {
+    const ligne = document.createElement("tr");
+
+    ligne.innerHTML = `
+      <td>${inscription.numero}</td>
+      <td>${inscription.eleve}</td>
+      <td>${inscription.niveau}</td>
+      <td>${inscription.cours}</td>
+      <td>${inscription.telephone}</td>
+      <td>${inscription.statut}</td>
+      <td>${inscription.date}</td>
+    `;
+
+    tableBody.appendChild(ligne);
+  });
+
+  table.appendChild(tableBody);
+  pageContent.appendChild(table);
+
+  return pageContent;
+}
+
 
 
 

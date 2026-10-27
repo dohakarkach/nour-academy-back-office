@@ -161,7 +161,7 @@ export const courses = [
     prix: 400,
     places: 15,
   },
-
+];
 export const inscription = [
   {
     numero: "INS-001",

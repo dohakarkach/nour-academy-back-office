@@ -2,7 +2,6 @@ import { courses } from "./data.js";
 
 const CAPACITY = 15;
 
-// Temporary sample data for the dashboard
 const sampleInscriptions = [
   {
     studentName: "Amine Alaoui",
@@ -140,7 +139,7 @@ function getStatistics(inscriptions) {
 
     if (inscription.status === "Payée") {
       stats.paid++;
-      stats.revenue += inscription.fee;
+      for (let id of inscription.course) stats.revenue += courses[id - 1].prix;
     }
   });
 
@@ -159,7 +158,9 @@ function getCourseOccupancy(inscriptions) {
     courseObject.push(obj);
   }
 
-  inscriptions.forEach((inscription) => { for (let id of inscription.course) courseObject[id - 1].students++; });
+  inscriptions.forEach((inscription) => {
+    for (let id of inscription.course) courseObject[id - 1].students++;
+  });
 
   return courseObject;
 }
