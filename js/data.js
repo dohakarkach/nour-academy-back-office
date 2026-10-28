@@ -162,33 +162,34 @@ export const courses = [
     places: 15,
   },
 ];
+
 export const inscription = [
   {
     numero: "INS-001",
     eleve: "Salma Ahmed",
     niveau: "Collège",
-    cours: [3,7,4],
+    cours: [3, 7, 4],
     telephone: "0612345678",
-    statut: "Validé",
-    date: "2026-10-20"
+    statut: "Validée",
+    date: "2026-10-20",
   },
   {
     numero: "INS-002",
     eleve: "Yassine Karim",
     niveau: "Primaire",
-    cours: [15,14],
+    cours: [15, 14],
     telephone: "0623456789",
     statut: "En attente",
-    date: "2026-10-20"
+    date: "2026-10-20",
   },
   {
     numero: "INS-003",
     eleve: "Imane Ali",
     niveau: "2e Bac",
-    cours: [12,17],
+    cours: [12, 17],
     telephone: "0634567890",
-    statut: "Incomplet",
-    date: "2026-10-21"
+    statut: "Payée",
+    date: "2026-10-21",
   },
   {
     numero: "INS-004",
@@ -196,35 +197,35 @@ export const inscription = [
     niveau: "Collège",
     cours: [14],
     telephone: "0645678901",
-    statut: "Validé",
-    date: "2026-10-21"
+    statut: "Validée",
+    date: "2026-10-21",
   },
   {
     numero: "INS-005",
     eleve: "Aya Hassan",
     niveau: "Primaire",
-    cours: [15,14],
+    cours: [15, 14],
     telephone: "0656789012",
     statut: "En attente",
-    date: "2026-10-21"
+    date: "2026-10-21",
   },
   {
     numero: "INS-006",
     eleve: "Omar Rami",
     niveau: "1re Bac",
-    cours: [11,13],
+    cours: [11, 13],
     telephone: "0667890123",
-    statut: "Validé",
-    date: "2026-10-22"
+    statut: "Validée",
+    date: "2026-10-22",
   },
   {
     numero: "INS-007",
     eleve: "Meryem Said",
     niveau: "Tronc commun",
-    cours: [3,7,4],
+    cours: [3, 7, 4],
     telephone: "0678901234",
-    statut: "Incomplet",
-    date: "2026-10-22"
+    statut: "Payée",
+    date: "2026-10-22",
   },
   {
     numero: "INS-008",
@@ -232,35 +233,35 @@ export const inscription = [
     niveau: "Collège",
     cours: [14],
     telephone: "0689012345",
-    statut: "Validé",
-    date: "2026-10-22"
+    statut: "Validée",
+    date: "2026-10-22",
   },
   {
     numero: "INS-009",
     eleve: "Lina Samir",
     niveau: "Primaire",
-    cours: [15,14],
+    cours: [15, 14],
     telephone: "0690123456",
     statut: "En attente",
-    date: "2026-10-23"
+    date: "2026-10-23",
   },
   {
     numero: "INS-010",
     eleve: "Hamza Anas",
     niveau: "2e Bac",
-    cours: [15,14,18],
+    cours: [15, 14, 18],
     telephone: "0601234567",
-    statut: "Validé",
-    date: "2026-10-23"
+    statut: "Validée",
+    date: "2026-10-23",
   },
   {
     numero: "INS-011",
     eleve: "Nour El Houda",
     niveau: "Collège",
-    cours: [3,7,4,16],
+    cours: [3, 7, 4, 16],
     telephone: "0611122233",
     statut: "En attente",
-    date: "2026-10-23"
+    date: "2026-10-23",
   },
   {
     numero: "INS-012",
@@ -268,44 +269,44 @@ export const inscription = [
     niveau: "1re Bac",
     cours: [14],
     telephone: "0622233344",
-    statut: "Validé",
-    date: "2026-10-24"
+    statut: "Validée",
+    date: "2026-10-24",
   },
   {
     numero: "INS-013",
     eleve: "Sara Mehdi",
     niveau: "Primaire",
-    cours: [15,14],
+    cours: [15, 14],
     telephone: "0633344455",
-    statut: "Incomplet",
-    date: "2026-10-24"
+    statut: "Payée",
+    date: "2026-10-24",
   },
   {
     numero: "INS-014",
     eleve: "Anas Bilal",
     niveau: "Tronc commun",
-    cours: [12,17],
+    cours: [12, 17],
     telephone: "0644455566",
-    statut: "Validé",
-    date: "2026-10-24"
+    statut: "Validée",
+    date: "2026-10-24",
   },
   {
     numero: "INS-015",
     eleve: "Rania Younes",
     niveau: "2e Bac",
-    cours: [15,13,12],
+    cours: [15, 13, 12],
     telephone: "0655566677",
     statut: "En attente",
-    date: "2026-10-25"
+    date: "2026-10-25",
   },
   {
     numero: "INS-016",
     eleve: "Mehdi Zakaria",
     niveau: "Collège",
-    cours: [2,18,16],
+    cours: [2, 18, 16],
     telephone: "0666677788",
-    statut: "Validé",
-    date: "2026-10-25"
+    statut: "Validée",
+    date: "2026-10-25",
   },
   {
     numero: "INS-017",
@@ -314,33 +315,33 @@ export const inscription = [
     cours: [14],
     telephone: "0677788899",
     statut: "En attente",
-    date: "2026-10-25"
+    date: "2026-10-25",
   },
   {
     numero: "INS-018",
     eleve: "Youssef Karim",
     niveau: "1re Bac",
-    cours: [11,13],
+    cours: [11, 13],
     telephone: "0688899900",
-    statut: "Incomplet",
-    date: "2026-10-26"
+    statut: "Payée",
+    date: "2026-10-26",
   },
   {
     numero: "INS-019",
     eleve: "Malak Adil",
     niveau: "2e Bac",
-    cours: [12,17,18,16],
+    cours: [12, 17, 18, 16],
     telephone: "0699900011",
-    statut: "Validé",
-    date: "2026-10-26"
+    statut: "Validée",
+    date: "2026-10-26",
   },
   {
     numero: "INS-020",
     eleve: "Rayan Amine",
     niveau: "Collège",
-    cours: [15,13,16,18],
+    cours: [15, 13, 16, 18],
     telephone: "0600112233",
     statut: "En attente",
-    date: "2026-10-27"
-  }
+    date: "2026-10-27",
+  },
 ];
