@@ -1,5 +1,6 @@
 import { renderDashboard } from "./dashboard.js";
 import { renderTable } from "./inscription.js";
+import { afficherFormulaire, verifierFormulaire } from "./ajouter.js";
 
 let menuButton = document.getElementById("menuButton");
 let sidebar = document.getElementById("sidebar");
@@ -27,4 +28,5 @@ const pageContent = document.querySelector("#pageContent");
 
 pageContent.innerHTML = renderDashboard();
 pageContent.appendChild(renderTable());
-
+pageContent.appendChild(afficherFormulaire());
+verifierFormulaire();
