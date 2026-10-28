@@ -550,3 +550,147 @@ td {
   text-align: left;
   white-space: nowrap;
 }
+
+/* Formulaire d'inscription */
+.formulaire-inscription {
+  width: 100%;
+  max-width: 650px;
+  margin: 40px auto;
+  padding: 32px;
+  background-color: #182230;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+.formulaire-inscription .titre-formulaire {
+    color: #f2f4f7;
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Titre */
+.formulaire-inscription h2 {
+  margin: 0 0 28px;
+  color: #172033;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+/* Formulaire */
+.formulaire-inscription form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Labels */
+.formulaire-inscription label {
+  margin-top: 8px;
+  color: #98a2b3;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Champs et select */
+.formulaire-inscription input,
+.formulaire-inscription select {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #172033;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Focus */
+.formulaire-inscription input:focus,
+.formulaire-inscription select:focus {
+  border-color: #007ba7;
+  box-shadow: 0 0 0 3px rgba(0, 123, 167, 0.12);
+}
+
+/* Bouton */
+.formulaire-inscription button {
+  margin-top: 16px;
+  padding: 13px 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007ba7;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.formulaire-inscription button:hover {
+  background-color: #00658a;
+}
+
+.formulaire-inscription button:active {
+  transform: scale(0.99);
+}
+
+/* Message de confirmation */
+.formulaire-inscription #message {
+  margin: 12px 0 0;
+  color: #15803d;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .formulaire-inscription {
+    width: auto;
+    margin: 20px 12px;
+    padding: 22px;
+  }
+
+  .formulaire-inscription h2 {
+    font-size: 21px;
+  }
+}
+
+/* Input invalide : rouge */
+
+.champ.invalide {
+    border: 1px solid red;
+    background-color: #fff0f0;
+}
+
+.champ.valide {
+    border: 1px solid green;
+    background-color: #f0fff0;
+}
+
+.message-erreur {
+    color: red;
+    font-size: 12px;
+    margin: 4px 0 8px;
+}
+
+.message-erreur.succes {
+    color: green;
+}
+
+#message {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+#message.erreur {
+    color: red;
+}
+
+#message.succes {
+    color: green;
+}

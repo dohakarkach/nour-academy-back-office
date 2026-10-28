@@ -169,7 +169,7 @@ export const inscription = [
     niveau: "Collège",
     cours: [3,7,4],
     telephone: "0612345678",
-    statut: "Validé",
+    statut: "Validée",
     date: "2026-10-20"
   },
   {
@@ -187,7 +187,7 @@ export const inscription = [
     niveau: "2e Bac",
     cours: [12,17],
     telephone: "0634567890",
-    statut: "Incomplet",
+    statut: "Payée",
     date: "2026-10-21"
   },
   {
@@ -196,7 +196,7 @@ export const inscription = [
     niveau: "Collège",
     cours: [14],
     telephone: "0645678901",
-    statut: "Validé",
+    statut: "Validée",
     date: "2026-10-21"
   },
   {
@@ -214,7 +214,7 @@ export const inscription = [
     niveau: "1re Bac",
     cours: [11,13],
     telephone: "0667890123",
-    statut: "Validé",
+    statut: "Validée",
     date: "2026-10-22"
   },
   {
@@ -223,7 +223,7 @@ export const inscription = [
     niveau: "Tronc commun",
     cours: [3,7,4],
     telephone: "0678901234",
-    statut: "Incomplet",
+    statut: "Payée",
     date: "2026-10-22"
   },
   {
@@ -232,7 +232,7 @@ export const inscription = [
     niveau: "Collège",
     cours: [14],
     telephone: "0689012345",
-    statut: "Validé",
+    statut: "Validée",
     date: "2026-10-22"
   },
   {
@@ -250,7 +250,7 @@ export const inscription = [
     niveau: "2e Bac",
     cours: [15,14,18],
     telephone: "0601234567",
-    statut: "Validé",
+    statut: "Validée",
     date: "2026-10-23"
   },
   {
@@ -268,7 +268,7 @@ export const inscription = [
     niveau: "1re Bac",
     cours: [14],
     telephone: "0622233344",
-    statut: "Validé",
+    statut: "Validée",
     date: "2026-10-24"
   },
   {
@@ -277,7 +277,7 @@ export const inscription = [
     niveau: "Primaire",
     cours: [15,14],
     telephone: "0633344455",
-    statut: "Incomplet",
+    statut: "Payée",
     date: "2026-10-24"
   },
   {
@@ -286,7 +286,7 @@ export const inscription = [
     niveau: "Tronc commun",
     cours: [12,17],
     telephone: "0644455566",
-    statut: "Validé",
+    statut: "Validée",
     date: "2026-10-24"
   },
   {
@@ -304,7 +304,7 @@ export const inscription = [
     niveau: "Collège",
     cours: [2,18,16],
     telephone: "0666677788",
-    statut: "Validé",
+    statut: "Validée",
     date: "2026-10-25"
   },
   {
@@ -322,7 +322,7 @@ export const inscription = [
     niveau: "1re Bac",
     cours: [11,13],
     telephone: "0688899900",
-    statut: "Incomplet",
+    statut: "Payée",
     date: "2026-10-26"
   },
   {
@@ -331,7 +331,7 @@ export const inscription = [
     niveau: "2e Bac",
     cours: [12,17,18,16],
     telephone: "0699900011",
-    statut: "Validé",
+    statut: "Validée",
     date: "2026-10-26"
   },
   {
