@@ -16,7 +16,7 @@ export function renderTable() {
   pageContent.classList.add("inscriptions-page");
 
   const searchInput = document.getElementById("globalSearch");
-  const statusFilter = document.querySelector("#statusFilter");
+  const statusFilter = document.getElementById("statusFilter");
 
   searchInput.value = sessionStorage.getItem("recherche") || "";
   statusFilter.value = sessionStorage.getItem("statutFiltre") || "Tous";
