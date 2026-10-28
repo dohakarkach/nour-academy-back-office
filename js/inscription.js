@@ -1,4 +1,4 @@
-import {inscription} from './data.js';
+import { inscription } from "./data.js";
 import { courses } from "./data.js";
 
 const donneesSauvegardees = localStorage.getItem("inscription");
@@ -7,7 +7,7 @@ if (donneesSauvegardees === null) {
   localStorage.setItem("inscriptions", JSON.stringify(inscription));
 }
 const inscriptionsSauvegardees = JSON.parse(
-  localStorage.getItem("inscriptions")
+  localStorage.getItem("inscriptions"),
 );
 
 export function renderTable() {
@@ -36,23 +36,19 @@ export function renderTable() {
     const ligne = document.createElement("tr");
 
     // Récupérer les cours correspondants aux IDs dans l'inscription sans .map() ni .find()
-   const tableauDesCours = [];
+    const tableauDesCours = [];
 
-for (let i = 0; i < inscription.cours.length; i++) {
-    const coursId = inscription.cours[i];
-console.log("ID inscription :", coursId, typeof coursId);
+    for (let i = 0; i < inscription.cours.length; i++) {
+      const coursId = inscription.cours[i];
 
+      const coursTrouve = courses.find((c) => Number(c.id) === Number(coursId));
 
-const coursTrouve = courses.find(c => Number(c.id) === Number(coursId));
-
-console.log("Cours trouvé :", coursTrouve); 
-
-    if (coursTrouve) {
+      if (coursTrouve) {
         tableauDesCours.push(coursTrouve.matiere);
+      }
     }
-}
 
-ligne.innerHTML = `
+    ligne.innerHTML = `
     <td>${inscription.numero}</td>
     <td>${inscription.eleve}</td>
     <td>${inscription.niveau}</td>
@@ -62,7 +58,7 @@ ligne.innerHTML = `
     <td>${inscription.date}</td>
 `;
 
-tableBody.appendChild(ligne);
+    tableBody.appendChild(ligne);
   });
 
   table.appendChild(tableBody);
@@ -70,4 +66,3 @@ tableBody.appendChild(ligne);
 
   return pageContent;
 }
-
