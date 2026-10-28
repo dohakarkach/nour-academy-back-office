@@ -27,10 +27,6 @@ export function renderTable() {
                 <th>Date</th>
               </tr>
             </thead>
-
-            <tbody id="inscriptions-body">
-              <!-- Les inscriptions seront ajoutées par JavaScript -->
-            </tbody>
           `;
 
   const tableBody = document.createElement("tbody");
@@ -57,7 +53,4 @@ export function renderTable() {
 
   return pageContent;
 }
-
-
-
 
