@@ -83,56 +83,27 @@
             aria-label="Rechercher une inscription"
           />
         </label>
+
+        <div class="table-controls">
+          <label for="statusFilter">Filtrer par statut</label>
+          <select id="statusFilter">
+            <option value="Tous">Tous les statuts</option>
+            <option value="En attente">En attente</option>
+            <option value="Validée">Validée</option>
+            <option value="Payée">Payée</option>
+          </select>
+
+          <label for="sortBy">Trier par</label>
+          <select id="sortBy">
+            <option value="nom-asc">Nom : A à Z</option>
+            <option value="nom-desc">Nom : Z à A</option>
+            <option value="date-asc">Date : plus ancienne</option>
+            <option value="date-desc">Date : plus récente</option>
+          </select>
+        </div>
       </header>
 
-      <section class="page-content" id="pageContent">
-        <!-- <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Numéro de dossier</th>
-                <th>Élève</th>
-                <th>Niveau</th>
-                <th>Cours</th>
-                <th>Téléphone du parent</th>
-                <th>Statut</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-
-            <tbody id="inscriptions-body">
-              Les inscriptions seront ajoutées par JavaScript
-            </tbody>
-          </table>
-        </div> -->
-
-        <!-- <section class="formulaire-inscription">
-          <h2>Ajouter une inscription</h2>
-
-          <form id="formInscription">
-            <label for="nom">Nom de l'élève :</label>
-            <input type="text" id="nom" required />
-
-            <label for="prenom">Prénom de l'élève :</label>
-            <input type="text" id="prenom" required />
-
-            <label for="telephone">Téléphone du parent :</label>
-            <input type="tel" id="telephone" required />
-
-            <label for="niveau">Niveau scolaire :</label>
-            <select id="niveau" required>
-              <option value="">Choisir un niveau</option>
-              <option value="Primaire">Primaire</option>
-              <option value="Collège">Collège</option>
-              <option value="Lycée">Lycée</option>
-            </select>
-
-            <button type="submit">Enregistrer l'inscription</button>
-          </form>
-
-          <p id="message"></p>
-        </section> -->
-      </section>
+      <section class="page-content" id="pageContent"></section>
     </main>
   </body>
 </html>
