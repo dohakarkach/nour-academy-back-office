@@ -694,3 +694,81 @@ td {
 #message.succes {
     color: green;
 }
+
+.table-container {
+  margin-top: 30px;
+  overflow-x: auto;
+}
+
+.table-controls {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.table-controls label {
+  color: #98a7bd;
+  font-size: 14px;
+}
+
+.table-controls select {
+  padding: 10px 12px;
+  color: #f2f4f7;
+  background-color: #182230;
+  border: 1px solid #293548;
+  border-radius: 8px;
+  font: inherit;
+}
+
+/* .table-controls select:focus,
+#globalSearch:focus {
+  outline: 2px solid #5268ff;
+  outline-offset: 2px;
+} */
+
+#resultCount {
+  margin-bottom: 12px;
+  color: #98a7bd;
+  font-size: 14px;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+
+.table-container th,
+.table-container td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #293548;
+}
+
+.table-container th {
+  color: #98a7bd;
+  font-weight: 500;
+}
+
+.table-container td {
+  color: #f2f4f7;
+}
+
+.inscriptions-page {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  .table-controls {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .table-controls select {
+    width: 100%;
+  }
+}
