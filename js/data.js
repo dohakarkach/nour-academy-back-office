@@ -163,7 +163,14 @@ export const courses = [
   },
 ];
 
-export const inscription = [
+// primaire : [1, 2];
+// college : [3, ,7];
+// tronc commun : [8, ,10];
+// 1e bac: [11, ,13];
+// 2e bac: [16, ,18];
+// lycée : [A14, F15];
+
+export let inscription = [
   {
     numero: "INS-001",
     eleve: "Salma Ahmed",
@@ -177,7 +184,7 @@ export const inscription = [
     numero: "INS-002",
     eleve: "Yassine Karim",
     niveau: "Primaire",
-    cours: [15, 14],
+    cours: [1, 2],
     telephone: "0623456789",
     statut: "En attente",
     date: "2026-10-20",
@@ -186,7 +193,7 @@ export const inscription = [
     numero: "INS-003",
     eleve: "Imane Ali",
     niveau: "2e Bac",
-    cours: [12, 17],
+    cours: [17, 16],
     telephone: "0634567890",
     statut: "Payée",
     date: "2026-10-21"
@@ -195,7 +202,7 @@ export const inscription = [
     numero: "INS-004",
     eleve: "Adam Mohamed",
     niveau: "Collège",
-    cours: [14],
+    cours: [6, 7],
     telephone: "0645678901",
     statut: "Validée",
     date: "2026-10-21"
@@ -204,7 +211,7 @@ export const inscription = [
     numero: "INS-005",
     eleve: "Aya Hassan",
     niveau: "Primaire",
-    cours: [15, 14],
+    cours: [2],
     telephone: "0656789012",
     statut: "En attente",
     date: "2026-10-21",
@@ -222,7 +229,7 @@ export const inscription = [
     numero: "INS-007",
     eleve: "Meryem Said",
     niveau: "Tronc commun",
-    cours: [3, 7, 4],
+    cours: [8, 9, 10],
     telephone: "0678901234",
     statut: "Payée",
     date: "2026-10-22"
@@ -231,7 +238,7 @@ export const inscription = [
     numero: "INS-008",
     eleve: "Amine Nabil",
     niveau: "Collège",
-    cours: [14],
+    cours: [3, 6, 7],
     telephone: "0689012345",
     statut: "Validée",
     date: "2026-10-22"
@@ -240,7 +247,7 @@ export const inscription = [
     numero: "INS-009",
     eleve: "Lina Samir",
     niveau: "Primaire",
-    cours: [15, 14],
+    cours: [1, 2],
     telephone: "0690123456",
     statut: "En attente",
     date: "2026-10-23",
@@ -251,14 +258,14 @@ export const inscription = [
     niveau: "2e Bac",
     cours: [15, 14, 18],
     telephone: "0601234567",
-    statut: "Validée",
+    statut: "Payée",
     date: "2026-10-23"
   },
   {
     numero: "INS-011",
     eleve: "Nour El Houda",
     niveau: "Collège",
-    cours: [3, 7, 4, 16],
+    cours: [3, 7, 4],
     telephone: "0611122233",
     statut: "En attente",
     date: "2026-10-23",
@@ -267,7 +274,7 @@ export const inscription = [
     numero: "INS-012",
     eleve: "Ilyas Reda",
     niveau: "1re Bac",
-    cours: [14],
+    cours: [15],
     telephone: "0622233344",
     statut: "Validée",
     date: "2026-10-24"
@@ -276,7 +283,7 @@ export const inscription = [
     numero: "INS-013",
     eleve: "Sara Mehdi",
     niveau: "Primaire",
-    cours: [15, 14],
+    cours: [1, 2],
     telephone: "0633344455",
     statut: "Payée",
     date: "2026-10-24"
@@ -285,7 +292,7 @@ export const inscription = [
     numero: "INS-014",
     eleve: "Anas Bilal",
     niveau: "Tronc commun",
-    cours: [12, 17],
+    cours: [8, 10],
     telephone: "0644455566",
     statut: "Validée",
     date: "2026-10-24"
@@ -294,16 +301,16 @@ export const inscription = [
     numero: "INS-015",
     eleve: "Rania Younes",
     niveau: "2e Bac",
-    cours: [15, 13, 12],
+    cours: [14, 16, 17],
     telephone: "0655566677",
-    statut: "En attente",
+    statut: "Payée",
     date: "2026-10-25",
   },
   {
     numero: "INS-016",
     eleve: "Mehdi Zakaria",
     niveau: "Collège",
-    cours: [2, 18, 16],
+    cours: [3, 5, 7],
     telephone: "0666677788",
     statut: "Validée",
     date: "2026-10-25"
@@ -312,7 +319,7 @@ export const inscription = [
     numero: "INS-017",
     eleve: "Aya Amrani",
     niveau: "Primaire",
-    cours: [14],
+    cours: [2],
     telephone: "0677788899",
     statut: "En attente",
     date: "2026-10-25",
@@ -321,7 +328,7 @@ export const inscription = [
     numero: "INS-018",
     eleve: "Youssef Karim",
     niveau: "1re Bac",
-    cours: [11, 13],
+    cours: [11, 13, 15],
     telephone: "0688899900",
     statut: "Payée",
     date: "2026-10-26"
@@ -330,7 +337,7 @@ export const inscription = [
     numero: "INS-019",
     eleve: "Malak Adil",
     niveau: "2e Bac",
-    cours: [12, 17, 18, 16],
+    cours: [14, 17, 18, 16],
     telephone: "0699900011",
     statut: "Validée",
     date: "2026-10-26"
@@ -339,9 +346,13 @@ export const inscription = [
     numero: "INS-020",
     eleve: "Rayan Amine",
     niveau: "Collège",
-    cours: [15, 13, 16, 18],
+    cours: [3, 4, 5, 6],
     telephone: "0600112233",
-    statut: "En attente",
+    statut: "Payée",
     date: "2026-10-27",
   },
 ];
+
+export function setInscription(newArray) {
+  inscription = newArray;
+}

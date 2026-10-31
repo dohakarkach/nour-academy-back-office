@@ -28,6 +28,22 @@ body {
   font-size: 14px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+[id="tableau-de-bord"],
+#inscriptions,
+#formulaire {
+  scroll-margin-top: 200px;
+}
+
 button,
 input {
   font: inherit;
@@ -150,7 +166,7 @@ a {
   display: flex;
   align-items: center;
   gap: 20px;
-  height: 88px;
+  height: 100;
   padding: 0 16px 0 29px;
   border-bottom: 1px solid #202b3b;
   background: var(--topbar-bg);
@@ -261,7 +277,7 @@ a {
   }
 
   .topbar {
-    height: 76px;
+    height: 100;
     padding: 0 16px;
   }
 
@@ -551,6 +567,63 @@ td {
   white-space: nowrap;
 }
 
+.date-container {
+  vertical-align: middle;
+}
+
+.date {
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.date-container .table-button {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin: 4px;
+  padding: 0;
+  vertical-align: middle;
+  border: 1px solid #334b80;
+  border-radius: 8px;
+  background: #1b2b4d;
+  color: #a9bcff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.date-container .table-button:last-of-type {
+  border-color: #70404b;
+  background: #38232d;
+  color: #ffb6c1;
+}
+
+.date-container .table-button:hover {
+  border-color: #5268ff;
+  background: #263d70;
+  transform: translateY(-1px);
+}
+
+.date-container .table-button:last-of-type:hover {
+  border-color: #c45b6c;
+  background: #512e3a;
+}
+
+.date-container .table-button:focus-visible {
+  outline: 2px solid #7594ff;
+  outline-offset: 2px;
+}
+
+.date-container .table-button:last-of-type:focus-visible {
+  outline-color: #ff8f9e;
+}
+
 /* Formulaire d'inscription */
 .formulaire-inscription {
   width: 100%;
@@ -563,11 +636,11 @@ td {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 .formulaire-inscription .titre-formulaire {
-    color: #f2f4f7;
-    font-size: 28px;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 25px;
+  color: #f2f4f7;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 25px;
 }
 
 /* Titre */
@@ -607,7 +680,9 @@ td {
   font-family: inherit;
   font-size: 14px;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 /* Focus */
@@ -629,7 +704,9 @@ td {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
+  transition:
+    background-color 0.2s,
+    transform 0.2s;
 }
 
 .formulaire-inscription button:hover {
@@ -663,36 +740,36 @@ td {
 /* Input invalide : rouge */
 
 .champ.invalide {
-    border: 1px solid red;
-    background-color: #fff0f0;
+  border: 1px solid red;
+  background-color: #fff0f0;
 }
 
 .champ.valide {
-    border: 1px solid green;
-    background-color: #f0fff0;
+  border: 1px solid green;
+  background-color: #f0fff0;
 }
 
 .message-erreur {
-    color: red;
-    font-size: 12px;
-    margin: 4px 0 8px;
+  color: red;
+  font-size: 12px;
+  margin: 4px 0 8px;
 }
 
 .message-erreur.succes {
-    color: green;
+  color: green;
 }
 
 #message {
-    margin-top: 10px;
-    font-size: 14px;
+  margin-top: 10px;
+  font-size: 14px;
 }
 
 #message.erreur {
-    color: red;
+  color: red;
 }
 
 #message.succes {
-    color: green;
+  color: green;
 }
 
 .table-container {
@@ -701,21 +778,25 @@ td {
 }
 
 .table-controls {
-  margin-top: 20px;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 220px);
   align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px 16px;
+  width: 100%;
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .table-controls label {
   color: #98a7bd;
   font-size: 14px;
+  text-align: right;
 }
 
 .table-controls select {
-  padding: 10px 12px;
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 14px;
   color: #f2f4f7;
   background-color: #182230;
   border: 1px solid #293548;
@@ -723,11 +804,11 @@ td {
   font: inherit;
 }
 
-/* .table-controls select:focus,
-#globalSearch:focus {
+.table-controls select:focus,
+.command-search:focus {
   outline: 2px solid #5268ff;
   outline-offset: 2px;
-} */
+}
 
 #resultCount {
   margin-bottom: 12px;
@@ -764,11 +845,22 @@ td {
 
 @media (max-width: 600px) {
   .table-controls {
-    align-items: flex-start;
-    flex-direction: column;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: 8px;
+  }
+
+  .table-controls label {
+    width: 100%;
+    text-align: center;
   }
 
   .table-controls select {
-    width: 100%;
+    width: min(100%, 320px);
+    min-height: 46px;
   }
+}
+
+.hidden {
+  display: none;
 }

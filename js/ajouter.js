@@ -6,6 +6,7 @@ const regexTelephone = /^0[67][0-9]{8}$/;
 export function afficherFormulaire() {
   const formulaire = document.createElement("section");
   formulaire.classList.add("formulaire-inscription");
+  formulaire.id = "formulaire";
 
   formulaire.innerHTML = `
     <h2 class="titre-formulaire">Ajouter une inscription</h2>

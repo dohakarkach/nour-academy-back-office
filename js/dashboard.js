@@ -1,5 +1,5 @@
 import { courses } from "./data.js";
-import { inscription as inscriptions} from "./data.js";
+import { inscription} from "./data.js";
 
 const CAPACITY = 15;
 
@@ -95,7 +95,7 @@ function renderCourseOccupancy(inscriptions) {
 }
 
 export function renderDashboard() {
-  const stats = getStatistics(inscriptions);
+  const stats = getStatistics(inscription);
 
   return `
     <div id="tableau-de-bord" class="dashboard-header">
@@ -137,7 +137,7 @@ export function renderDashboard() {
       </p>
 
       <div class="course-list">
-        ${renderCourseOccupancy(inscriptions)}
+        ${renderCourseOccupancy(inscription)}
       </div>
     </section>
   `;
