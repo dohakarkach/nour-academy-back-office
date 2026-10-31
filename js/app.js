@@ -2,6 +2,7 @@ import { renderDashboard } from "./dashboard.js";
 import { renderTable } from "./inscription.js";
 import { afficherFormulaire, verifierFormulaire } from "./ajouter.js";
 import { deleteListeners } from "./supprimer.js";
+import { editListeners } from "./modifier.js";
 
 let menuButton = document.getElementById("menuButton");
 let sidebar = document.getElementById("sidebar");
@@ -55,4 +56,5 @@ function updateSelectedNavigationLink() {
 window.addEventListener("hashchange", updateSelectedNavigationLink);
 updateSelectedNavigationLink();
 
-deleteListeners()
+deleteListeners();
+editListeners();

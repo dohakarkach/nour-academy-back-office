@@ -864,3 +864,9 @@ td {
 .hidden {
   display: none;
 }
+
+.editable {
+  border: 2px dashed #4f46e5;
+  color: #00658a;
+  background-color: black;
+}
