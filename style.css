@@ -772,3 +772,139 @@ td {
     width: 100%;
   }
 }
+
+/* ===== FORMULAIRE AJOUTER INSCRIPTION ===== */
+
+.form {
+    width: 100%;
+    max-width: 750px;
+    margin: 35px auto;
+    padding: 30px;
+    background: var(--sidebar-bg);
+    border: 1px solid #293653;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+#formInscription {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#formInscription h1 {
+    font-size: 25px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 15px;
+}
+
+#formInscription label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 8px;
+}
+
+#formInscription input,
+#formInscription select {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #34425e;
+    border-radius: 9px;
+    background: var(--page-bg);
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+#formInscription input:focus,
+#formInscription select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(255, 45, 149, 0.15);
+}
+
+#formInscription select[multiple] {
+    min-height: 150px;
+    cursor: pointer;
+}
+
+#formInscription select option {
+    background: var(--page-bg);
+    color: var(--text);
+    padding: 8px;
+}
+
+#formInscription small {
+    color: #aab4c8;
+    font-size: 12px;
+}
+
+#formInscription button {
+    margin-top: 15px;
+    padding: 14px;
+    border: none;
+    border-radius: 9px;
+    background: var(--accent-color);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#formInscription button:hover {
+    background: #e51c80;
+    transform: translateY(-2px);
+}
+
+#formInscription button:active {
+    transform: translateY(0);
+}
+
+/* Messages d'erreur */
+
+#formInscription .erreur {
+    color: #ff6b7a;
+    font-size: 12px;
+    margin: 0;
+    min-height: 14px;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .form {
+        width: 95%;
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    #formInscription h1 {
+        font-size: 21px;
+    }
+}
+/* Message d'erreur */
+#formInscription .erreur {
+    color: #ff4d5e;
+    font-size: 12px;
+    margin: 0;
+}
+
+/* Message valide */
+#formInscription .valide {
+    color: #22c55e;
+    font-size: 12px;
+    margin: 0;
+}
+
+/* Champ invalide */
+#formInscription .input-invalide {
+    border: 1px solid #ff4d5e;
+}
+
+/* Champ valide */
+#formInscription .input-valide {
+    border: 1px solid #22c55e;
+}

@@ -1,32 +1,45 @@
+
+console.log("APP JS fonctionne");
+
 import { renderDashboard } from "./dashboard.js";
 import { renderTable } from "./inscription.js";
-import { afficherFormulaire, verifierFormulaire } from "./ajouter.js";
+import { afficherFormulaire } from "./ajouter.js";
 
-let menuButton = document.getElementById("menuButton");
-let sidebar = document.getElementById("sidebar");
-let leftArrow = document.getElementById("mobile-button");
+const menuButton = document.getElementById("menuButton");
+const sidebar = document.getElementById("sidebar");
+const leftArrow = document.getElementById("mobile-button");
 
-menuButton.addEventListener("click", () => {
-  if (window.innerWidth <= 850) sidebar.classList.toggle("sidebar-open");
-  else sidebar.classList.toggle("sidebar-collapsed");
+if (menuButton && sidebar) {
+  menuButton.addEventListener("click", () => {
+    if (window.innerWidth <= 850) {
+      sidebar.classList.toggle("sidebar-open");
+    } else {
+      sidebar.classList.toggle("sidebar-collapsed");
+    }
 
-  menuButton.setAttribute(
-    "aria-expanded",
-    sidebar.classList.contains("sidebar-open") ||
-      !sidebar.classList.contains("sidebar-collapsed")
-      ? "true"
-      : "false",
-  );
-});
+    menuButton.setAttribute(
+      "aria-expanded",
+      sidebar.classList.contains("sidebar-open") ||
+        !sidebar.classList.contains("sidebar-collapsed")
+        ? "true"
+        : "false"
+    );
+  });
+}
 
-leftArrow.addEventListener("click", () => {
+if (leftArrow && sidebar) {
+  leftArrow.addEventListener("click", () => {
     sidebar.classList.toggle("sidebar-open");
-    leftArrow.setAttribute("aria-expanded", false);
-})
+    leftArrow.setAttribute("aria-expanded", "false");
+  });
+}
 
 const pageContent = document.querySelector("#pageContent");
 
-pageContent.innerHTML = renderDashboard();
-pageContent.appendChild(renderTable());
-pageContent.appendChild(afficherFormulaire());
-verifierFormulaire();
+if (pageContent) {
+  pageContent.innerHTML = renderDashboard();
+
+  pageContent.appendChild(renderTable());
+
+  afficherFormulaire();
+}

@@ -1,15 +1,10 @@
-import { inscription } from "./data.js";
-import { courses } from "./data.js";
+import { inscription, courses } from "./data.js";
 
 const donneesSauvegardees = localStorage.getItem("inscriptions");
 
 if (donneesSauvegardees === null) {
   localStorage.setItem("inscriptions", JSON.stringify(inscription));
 }
-
-const inscriptionsSauvegardees = JSON.parse(
-  localStorage.getItem("inscriptions"),
-);
 
 export function renderTable() {
   const pageContent = document.createElement("div");
@@ -20,8 +15,6 @@ export function renderTable() {
 
   searchInput.value = sessionStorage.getItem("recherche") || "";
   statusFilter.value = sessionStorage.getItem("statutFiltre") || "Tous";
-
-
 
   pageContent.innerHTML = `
     <p id="resultCount" aria-live="polite"></p>
@@ -44,7 +37,6 @@ export function renderTable() {
     </div>
   `;
 
-
   const sortBy = document.querySelector("#sortBy");
   const tableBody = pageContent.querySelector("#inscriptions-body");
   const resultCount = pageContent.querySelector("#resultCount");
@@ -56,6 +48,10 @@ export function renderTable() {
 
     sessionStorage.setItem("recherche", searchInput.value);
     sessionStorage.setItem("statutFiltre", statutChoisi);
+
+    // Lire les dernières inscriptions depuis localStorage
+    const inscriptionsSauvegardees =
+      JSON.parse(localStorage.getItem("inscriptions")) || [];
 
     const resultats = [];
 
@@ -90,6 +86,8 @@ export function renderTable() {
       if (triChoisi === "date-desc") {
         return b.date.localeCompare(a.date);
       }
+
+      return 0;
     });
 
     tableBody.innerHTML = "";
@@ -123,7 +121,8 @@ export function renderTable() {
       tableBody.appendChild(ligne);
     });
 
-    resultCount.textContent = resultats.length + " inscription(s) trouvée(s)";
+    resultCount.textContent =
+      resultats.length + " inscription(s) trouvée(s)";
   }
 
   searchInput.addEventListener("input", afficherInscriptions);
