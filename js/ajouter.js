@@ -1,243 +1,334 @@
 
-const regexNom = /^[A-Za-zÀ-ÿ\s'-]+$/;
-const regexTelephone = /^0[67][0-9]{8}$/;
+import { courses, inscription } from "./data.js";
+import { regexNom, regexTelephone } from "./validation.js";
+import { renderTable } from "./inscription.js";
 
-// 1. Création du formulaire
 export function afficherFormulaire() {
-  const formulaire = document.createElement("section");
-  formulaire.classList.add("formulaire-inscription");
-  formulaire.id = "formulaire";
+  const page = document.getElementById("pageContent");
 
-  formulaire.innerHTML = `
-    <h2 class="titre-formulaire">Ajouter une inscription</h2>
+  if (document.getElementById("formInscription")) return;
 
-    <form id="formInscription">
-      <label for="nom">Nom de l'élève :</label>
-      <input type="text" id="nom" class="champ" required>
-      <p id="erreur-nom" class="message-erreur"></p>
-
-      <label for="prenom">Prénom de l'élève :</label>
-      <input type="text" id="prenom" class="champ" required>
-      <p id="erreur-prenom" class="message-erreur"></p>
-
-      <label for="telephone">Téléphone du parent :</label>
-      <input type="tel" id="telephone" class="champ" required>
-      <p id="erreur-telephone" class="message-erreur"></p>
-
-      <label for="niveau">Niveau scolaire :</label>
-      <select id="niveau" required>
-        <option value="">Choisir un niveau</option>
-        <option value="Primaire">Primaire</option>
-        <option value="Collège">Collège</option>
-        <option value="Tronc commun">Tronc commun</option>
-        <option value="1re Bac">1re Bac</option>
-        <option value="2e Bac">2e Bac</option>
-      </select>
-
-      <label for="cours">Cours (choisissez un ou plusieurs cours) :</label>
-      <select id="cours" multiple required>
-        <option value="Mathématiques">Mathématiques</option>
-        <option value="Français">Français</option>
-        <option value="Anglais">Anglais</option>
-        <option value="Physique-Chimie">Physique-Chimie</option>
-        <option value="SVT">SVT</option>
-      </select>
-      <p id="erreur-cours" class="message-erreur"></p>
-
-      <button type="submit">Enregistrer l'inscription</button>
-    </form>
-
-    <p id="message"></p>
-  `;
-
-  return formulaire;
-}
-
-// 2. Validation du formulaire
-export function verifierFormulaire() {
-  const formulaire = document.querySelector("#formInscription");
-
-  if (!formulaire) return;
-
-  const niveau = formulaire.querySelector("#niveau");
-  const cours = formulaire.querySelector("#cours");
-  const erreurCours = formulaire.querySelector("#erreur-cours");
-  const message = formulaire.parentElement.querySelector("#message");
-
-  // Cours autorisés pour chaque niveau
-  const coursParNiveau = {
-    "Primaire": ["Mathématiques", "Français"],
-    "Collège": [
-      "Mathématiques",
-      "Français",
-      "Anglais",
-      "Physique-Chimie",
-      "SVT"
-    ],
-    "Tronc commun": [
-      "Mathématiques",
-      "Français",
-      "Anglais",
-      "Physique-Chimie",
-      "SVT"
-    ],
-    "1re Bac": [
-      "Mathématiques",
-      "Français",
-      "Anglais",
-      "Physique-Chimie",
-      "SVT"
-    ],
-    "2e Bac": [
-      "Mathématiques",
-      "Français",
-      "Anglais",
-      "Physique-Chimie",
-      "SVT"
-    ]
-  };
-
-  // Champs à vérifier
-  const champs = [
-    {
-      id: "nom",
-      regex: regexNom,
-      erreur: "erreur-nom",
-      texte: "Nom invalide : utilisez des lettres uniquement."
-    },
-    {
-      id: "prenom",
-      regex: regexNom,
-      erreur: "erreur-prenom",
-      texte: "Prénom invalide : utilisez des lettres uniquement."
-    },
-    {
-      id: "telephone",
-      regex: regexTelephone,
-      erreur: "erreur-telephone",
-      texte: "Téléphone invalide : 10 chiffres commençant par 06 ou 07."
-    }
-  ];
-
-  // Vérification pendant la saisie
-  champs.forEach(function (champInfo) {
-    const input = formulaire.querySelector("#" + champInfo.id);
-    const messageErreur = formulaire.querySelector(
-      "#" + champInfo.erreur
-    );
-
-    input.addEventListener("input", function () {
-      const valeur = input.value.trim();
-      const valide = champInfo.regex.test(valeur);
-
-      input.classList.toggle("invalide", valeur !== "" && !valide);
-      input.classList.toggle("valide", valeur !== "" && valide);
-
-      if (valeur === "") {
-        messageErreur.textContent = "";
-        messageErreur.className = "message-erreur";
-      } else if (valide) {
-        messageErreur.textContent = "✓ Champ valide !";
-        messageErreur.className = "message-erreur succes";
-      } else {
-        messageErreur.textContent = "✗ " + champInfo.texte;
-        messageErreur.className = "message-erreur";
-      }
-    });
-  });
-
-  // Vérification des cours selon le niveau
-  function verifierCoursSelonNiveau() {
-    const niveauChoisi = niveau.value;
-
-    const coursChoisis = Array.from(cours.selectedOptions).map(
-      function (option) {
-        return option.value;
-      }
-    );
-
-    const coursAutorises = coursParNiveau[niveauChoisi] || [];
-
-    const valide =
-      niveauChoisi !== "" &&
-      coursChoisis.length > 0 &&
-      coursChoisis.every(function (coursChoisi) {
-        return coursAutorises.includes(coursChoisi);
-      });
-
-    if (!valide) {
-      cours.classList.add("invalide");
-      cours.classList.remove("valide");
-
-      if (niveauChoisi === "") {
-        erreurCours.textContent =
-          "Choisissez d'abord un niveau scolaire.";
-      } else if (coursChoisis.length === 0) {
-        erreurCours.textContent = "Choisissez au moins un cours.";
-      } else {
-        erreurCours.textContent =
-          "Un ou plusieurs cours ne sont pas disponibles pour ce niveau.";
-      }
-
-      erreurCours.className = "message-erreur";
-    } else {
-      cours.classList.remove("invalide");
-      cours.classList.add("valide");
-      erreurCours.textContent = "";
-      erreurCours.className = "message-erreur succes";
-    }
-
-    return valide;
+  // Initialiser localStorage
+  if (localStorage.getItem("inscriptions") === null) {
+    localStorage.setItem("inscriptions", JSON.stringify(inscription));
   }
 
-  // Vérifier les cours quand le niveau ou la sélection change
-  niveau.addEventListener("change", verifierCoursSelonNiveau);
-  cours.addEventListener("change", verifierCoursSelonNiveau);
+  // Créer le formulaire
+  const formSection = document.createElement("section");
+  formSection.className = "form";
 
-  // Vérification lors de l'envoi
-  formulaire.addEventListener("submit", function (event) {
-    event.preventDefault();
+  const form = document.createElement("form");
+  form.id = "formInscription";
 
-    let champsInvalides = false;
+  form.innerHTML = `
+    <h1>Ajouter une inscription</h1>
 
-    champs.forEach(function (champInfo) {
-      const input = formulaire.querySelector("#" + champInfo.id);
-      const messageErreur = formulaire.querySelector(
-        "#" + champInfo.erreur
-      );
+    <label for="nom">Nom</label>
+    <input type="text" id="nom" placeholder="Nom de famille">
+    <p class="erreur" id="erreur-nom"></p>
 
-      const valeur = input.value.trim();
-      const valide = champInfo.regex.test(valeur);
+    <label for="prenom">Prénom</label>
+    <input type="text" id="prenom" placeholder="Prénom">
+    <p class="erreur" id="erreur-prenom"></p>
 
-      input.classList.toggle("invalide", !valide);
-      input.classList.toggle("valide", valide);
+    <label for="telephone">Téléphone du parent</label>
+    <input type="tel" id="telephone" placeholder="06XXXXXXXX">
+    <p class="erreur" id="erreur-telephone"></p>
 
-      if (!valide) {
-        champsInvalides = true;
-        messageErreur.textContent = "✗ " + champInfo.texte;
-        messageErreur.className = "message-erreur";
+    <label for="niveau">Niveau scolaire</label>
+    <select id="niveau">
+      <option value="">Choisir un niveau</option>
+    </select>
+    <p class="erreur" id="erreur-niveau"></p>
+
+    <label for="cours">Cours disponibles</label>
+    <select id="cours" multiple></select>
+    <small>Maintenir Ctrl pour sélectionner plusieurs cours.</small>
+    <p class="erreur" id="erreur-cours"></p>
+
+    <button type="submit">Ajouter l'inscription</button>
+  `;
+
+  formSection.appendChild(form);
+  page.appendChild(formSection);
+
+  // Récupérer les éléments
+  const nom = form.querySelector("#nom");
+  const prenom = form.querySelector("#prenom");
+  const telephone = form.querySelector("#telephone");
+  const niveau = form.querySelector("#niveau");
+  const selectCours = form.querySelector("#cours");
+
+  // Récupérer les inscriptions
+  function getInscriptions() {
+    return JSON.parse(localStorage.getItem("inscriptions")) || [];
+  }
+
+  // Afficher les messages
+  function afficherMessage(id, message, type) {
+    const element = document.getElementById(id);
+
+    element.textContent = message;
+    element.className = type;
+  }
+
+  // Validation d'un champ
+  function verifierChamp(input, regex, erreurId, messageErreur) {
+    const valeur = input.value.trim();
+
+    if (valeur === "") {
+      afficherMessage(erreurId, "", "erreur");
+
+      input.classList.remove("input-valide", "input-invalide");
+
+      return false;
+    }
+
+    if (regex.test(valeur)) {
+      afficherMessage(erreurId, "✓ Valide", "valide");
+
+      input.classList.remove("input-invalide");
+      input.classList.add("input-valide");
+
+      return true;
+    }
+
+    afficherMessage(erreurId, messageErreur, "erreur");
+
+    input.classList.remove("input-valide");
+    input.classList.add("input-invalide");
+
+    return false;
+  }
+
+  // Validation en temps réel du nom
+  nom.addEventListener("input", () => {
+    verifierChamp(
+      nom,
+      regexNom,
+      "erreur-nom",
+      "Nom invalide."
+    );
+  });
+
+  // Validation en temps réel du prénom
+  prenom.addEventListener("input", () => {
+    verifierChamp(
+      prenom,
+      regexNom,
+      "erreur-prenom",
+      "Prénom invalide."
+    );
+  });
+
+  // Validation en temps réel du téléphone
+  telephone.addEventListener("input", () => {
+    verifierChamp(
+      telephone,
+      regexTelephone,
+      "erreur-telephone",
+      "Téléphone invalide. Exemple : 0612345678"
+    );
+  });
+
+  // Remplir les niveaux automatiquement
+  const niveaux = [...new Set(courses.map(c => c.niveau))];
+
+  niveaux.forEach(niveauCours => {
+    const option = document.createElement("option");
+
+    option.value = niveauCours;
+    option.textContent = niveauCours;
+
+    niveau.appendChild(option);
+  });
+
+  // Afficher les cours selon le niveau choisi
+  niveau.addEventListener("change", () => {
+    selectCours.innerHTML = "";
+
+    afficherMessage("erreur-niveau", "", "erreur");
+    afficherMessage("erreur-cours", "", "erreur");
+
+    const coursDisponibles = courses.filter(
+      c => c.niveau === niveau.value
+    );
+
+    coursDisponibles.forEach(c => {
+      const option = document.createElement("option");
+
+      option.value = c.id;
+
+      if (c.places <= 0) {
+        option.textContent = `${c.titre} - Complet`;
+        option.disabled = true;
       } else {
-        messageErreur.textContent = "✓ Champ valide !";
-        messageErreur.className = "message-erreur succes";
+        option.textContent =
+          `${c.titre} - ${c.prix} MAD - ${c.places} places`;
       }
+
+      selectCours.appendChild(option);
     });
 
-    // Vérifier les cours une seule fois
-    const coursValide = verifierCoursSelonNiveau();
+    niveau.classList.add("input-valide");
+  });
+
+  // Retirer le style de validation du niveau
+  niveau.addEventListener("change", () => {
+    if (niveau.value === "") {
+      niveau.classList.remove("input-valide");
+    }
+  });
+
+  // Soumission du formulaire
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const nomValide = verifierChamp(
+      nom,
+      regexNom,
+      "erreur-nom",
+      "Nom invalide."
+    );
+
+    const prenomValide = verifierChamp(
+      prenom,
+      regexNom,
+      "erreur-prenom",
+      "Prénom invalide."
+    );
+
+    const telephoneValide = verifierChamp(
+      telephone,
+      regexTelephone,
+      "erreur-telephone",
+      "Téléphone invalide. Exemple : 0612345678"
+    );
+
+    let formulaireValide = true;
+
+    if (niveau.value === "") {
+      afficherMessage(
+        "erreur-niveau",
+        "Choisir un niveau.",
+        "erreur"
+      );
+      formulaireValide = false;
+    }
+
+    const coursSelectionnes = Array.from(
+      selectCours.selectedOptions
+    )
+      .filter(option => !option.disabled)
+      .map(option => Number(option.value));
+
+    if (coursSelectionnes.length === 0) {
+      afficherMessage(
+        "erreur-cours",
+        "Choisir au moins un cours.",
+        "erreur"
+      );
+      formulaireValide = false;
+    }
 
     if (
-      champsInvalides ||
-      !coursValide ||
-      !formulaire.checkValidity()
+      !nomValide ||
+      !prenomValide ||
+      !telephoneValide ||
+      !formulaireValide
     ) {
-      message.textContent =
-        "Veuillez corriger les erreurs du formulaire.";
-      message.className = "erreur";
-      formulaire.reportValidity();
       return;
     }
 
-    message.textContent = "Les informations sont valides !";
-    message.className = "succes";
+    const inscriptions = getInscriptions();
+
+    const eleve = `${prenom.value.trim()} ${nom.value.trim()}`;
+
+    // Vérifier les doublons
+    const doublon = inscriptions.some(inscriptionExistante => {
+      const memeEleve =
+        inscriptionExistante.eleve.toLowerCase() ===
+        eleve.toLowerCase();
+
+      const memeCours = inscriptionExistante.cours.some(id =>
+        coursSelectionnes.includes(Number(id))
+      );
+
+      return memeEleve && memeCours;
+    });
+
+    if (doublon) {
+      afficherMessage(
+        "erreur-cours",
+        "Cet élève est déjà inscrit à un de ces cours.",
+        "erreur"
+      );
+      return;
+    }
+
+    // Vérifier les places disponibles
+    const coursComplets = coursSelectionnes.some(id => {
+      const coursTrouve = courses.find(c => c.id === id);
+
+      return !coursTrouve || coursTrouve.places <= 0;
+    });
+
+    if (coursComplets) {
+      afficherMessage(
+        "erreur-cours",
+        "Un cours sélectionné est complet.",
+        "erreur"
+      );
+      return;
+    }
+
+    // Générer le numéro de dossier
+    const numeros = inscriptions.map(i =>
+      Number(i.numero.replace("INS-", ""))
+    );
+
+    const prochainNumero = Math.max(0, ...numeros) + 1;
+
+    const numero = `INS-${String(prochainNumero).padStart(3, "0")}`;
+
+    // Créer la nouvelle inscription
+    const nouvelleInscription = {
+      numero: numero,
+      eleve: eleve,
+      niveau: niveau.value,
+      cours: coursSelectionnes,
+      telephone: telephone.value.trim(),
+      statut: "En attente",
+      date: new Date().toISOString().slice(0, 10)
+    };
+
+    // Ajouter et sauvegarder
+    inscriptions.push(nouvelleInscription);
+
+    localStorage.setItem(
+      "inscriptions",
+      JSON.stringify(inscriptions)
+    );
+
+    // Actualiser le tableau
+    const ancienTableau = document.querySelector(".inscriptions-page");
+
+    if (ancienTableau) {
+      ancienTableau.replaceWith(renderTable());
+    }
+
+    alert("Inscription ajoutée avec succès !");
+
+    // Réinitialiser le formulaire
+    form.reset();
+    selectCours.innerHTML = "";
+
+    document.querySelectorAll(".erreur").forEach(element => {
+      element.textContent = "";
+    });
+
+    form.querySelectorAll("input, select").forEach(element => {
+      element.classList.remove("input-valide", "input-invalide");
+    });
   });
 }
