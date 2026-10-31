@@ -1,5 +1,4 @@
-import { inscription } from "./data.js";
-import { courses } from "./data.js";
+import { inscription, setInscription, courses } from "./data.js";
 
 const donneesSauvegardees = localStorage.getItem("inscriptions");
 
@@ -7,21 +6,20 @@ if (donneesSauvegardees === null) {
   localStorage.setItem("inscriptions", JSON.stringify(inscription));
 }
 
-const inscriptionsSauvegardees = JSON.parse(
-  localStorage.getItem("inscriptions"),
-);
+setInscription(JSON.parse(localStorage.getItem("inscriptions")));
 
 export function renderTable() {
   const pageContent = document.createElement("div");
   pageContent.classList.add("inscriptions-page");
+  pageContent.id = "inscriptions";
 
   const searchInput = document.getElementById("globalSearch");
   const statusFilter = document.getElementById("statusFilter");
+  const sortBy = document.querySelector("#sortBy");
 
   searchInput.value = sessionStorage.getItem("recherche") || "";
   statusFilter.value = sessionStorage.getItem("statutFiltre") || "Tous";
-
-
+  sortBy.value = sessionStorage.getItem("triFiltre") || sortBy.value;
 
   pageContent.innerHTML = `
     <p id="resultCount" aria-live="polite"></p>
@@ -44,8 +42,6 @@ export function renderTable() {
     </div>
   `;
 
-
-  const sortBy = document.querySelector("#sortBy");
   const tableBody = pageContent.querySelector("#inscriptions-body");
   const resultCount = pageContent.querySelector("#resultCount");
 
@@ -56,10 +52,11 @@ export function renderTable() {
 
     sessionStorage.setItem("recherche", searchInput.value);
     sessionStorage.setItem("statutFiltre", statutChoisi);
+    sessionStorage.setItem("triFiltre", triChoisi);
 
     const resultats = [];
 
-    inscriptionsSauvegardees.forEach((inscription) => {
+    inscription.forEach((inscription) => {
       const nom = inscription.eleve.toLowerCase();
       const telephone = inscription.telephone.toLowerCase();
 
@@ -117,10 +114,14 @@ export function renderTable() {
         <td>${tableauDesCours.join("<br><br>")}</td>
         <td>${inscription.telephone}</td>
         <td>${inscription.statut}</td>
-        <td>${inscription.date}</td>
+        <td class="date-container">
+          <div class="date">${inscription.date}</div>
+          <button id="m${inscription.numero}" class="menu-button table-button" type="button">M</button>
+          <button id="s${inscription.numero}" class="menu-button table-button" type="button">S</button>
+        </td>
       `;
-
       tableBody.appendChild(ligne);
+
     });
 
     resultCount.textContent = resultats.length + " inscription(s) trouvée(s)";

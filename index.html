@@ -26,7 +26,7 @@
 
         <button class="collapse-button menu-button" id="mobile-button">
           <svg
-      xmlns="http://www.w3.org/2000/svg"
+            xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             width="24"
             height="24"
@@ -50,7 +50,7 @@
           <div class="decoration-line" aria-hidden="true"></div>
           <a href="#inscriptions">Inscriptions</a>
           <div class="decoration-line" aria-hidden="true"></div>
-          <a href="#parametres">Paramètres</a>
+          <a href="#formulaire">formulaire</a>
         </div>
       </nav>
     </aside>
@@ -85,7 +85,7 @@
         </label>
 
         <div class="table-controls">
-          <label for="statusFilter">Filtrer par statut</label>
+          <label for="statusFilter">Statut</label>
           <select id="statusFilter">
             <option value="Tous">Tous les statuts</option>
             <option value="En attente">En attente</option>
@@ -103,7 +103,11 @@
         </div>
       </header>
 
-      <section class="page-content" id="pageContent"></section>
+      <section class="page-content" id="pageContent">
+        <div id="dashboard"></div>
+        <div id="table"></div>
+        <div id="formulaire"></div>
+      </section>
     </main>
   </body>
 </html>
