@@ -4,7 +4,7 @@ import { regexNom, regexTelephone } from "./validation.js";
 import { renderTable } from "./inscription.js";
 
 export function afficherFormulaire() {
-const page = document.getElementById("formulaire");
+  const page = document.getElementById("formulaire");
 
   if (document.getElementById("formInscription")) return;
 
@@ -41,9 +41,8 @@ const page = document.getElementById("formulaire");
     </select>
     <p class="erreur" id="erreur-niveau"></p>
 
-    <label for="cours">Cours disponibles</label>
-    <select id="cours" multiple></select>
-    <small>Maintenir Ctrl pour sélectionner plusieurs cours.</small>
+    <label>Cours disponibles</label>
+    <div id="cours"></div>
     <p class="erreur" id="erreur-cours"></p>
 
     <button type="submit">Ajouter l'inscription</button>
@@ -57,9 +56,9 @@ const page = document.getElementById("formulaire");
   const prenom = form.querySelector("#prenom");
   const telephone = form.querySelector("#telephone");
   const niveau = form.querySelector("#niveau");
-  const selectCours = form.querySelector("#cours");
+  const containerCours = form.querySelector("#cours");
 
-  // Récupérer les inscriptions depuis localStorage
+  // Récupérer les inscriptions
   function getInscriptions() {
     return JSON.parse(localStorage.getItem("inscriptions")) || [];
   }
@@ -67,7 +66,6 @@ const page = document.getElementById("formulaire");
   // Afficher les messages
   function afficherMessage(id, message, type) {
     const element = form.querySelector(`#${id}`);
-
     element.textContent = message;
     element.className = type;
   }
@@ -77,11 +75,7 @@ const page = document.getElementById("formulaire");
     const valeur = input.value.trim();
 
     if (valeur === "") {
-      afficherMessage(
-        erreurId,
-        "Ce champ est obligatoire.",
-        "erreur"
-      );
+      afficherMessage(erreurId, "Ce champ est obligatoire.", "erreur");
 
       input.classList.remove("input-valide");
       input.classList.add("input-invalide");
@@ -108,22 +102,12 @@ const page = document.getElementById("formulaire");
 
   // Validation en temps réel du nom
   nom.addEventListener("input", () => {
-    verifierChamp(
-      nom,
-      regexNom,
-      "erreur-nom",
-      "Nom invalide."
-    );
+    verifierChamp(nom, regexNom, "erreur-nom", "Nom invalide.");
   });
 
   // Validation en temps réel du prénom
   prenom.addEventListener("input", () => {
-    verifierChamp(
-      prenom,
-      regexNom,
-      "erreur-prenom",
-      "Prénom invalide."
-    );
+    verifierChamp(prenom, regexNom, "erreur-prenom", "Prénom invalide.");
   });
 
   // Validation en temps réel du téléphone
@@ -150,12 +134,10 @@ const page = document.getElementById("formulaire");
 
   // Afficher les cours selon le niveau choisi
   niveau.addEventListener("change", () => {
-    selectCours.innerHTML = "";
+    containerCours.innerHTML = "";
 
     afficherMessage("erreur-niveau", "", "erreur");
     afficherMessage("erreur-cours", "", "erreur");
-
-    selectCours.classList.remove("input-valide", "input-invalide");
 
     if (niveau.value === "") {
       niveau.classList.remove("input-valide", "input-invalide");
@@ -172,10 +154,6 @@ const page = document.getElementById("formulaire");
     const inscriptions = getInscriptions();
 
     coursDisponibles.forEach(c => {
-      const option = document.createElement("option");
-
-      option.value = c.id;
-
       const nombreInscrits = inscriptions.filter(
         inscriptionExistante =>
           inscriptionExistante.cours.some(
@@ -183,35 +161,49 @@ const page = document.getElementById("formulaire");
           )
       ).length;
 
+      const label = document.createElement("label");
+      label.className = "cours-option";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.value = c.id;
+      checkbox.className = "checkbox-cours";
+
       if (nombreInscrits >= 15) {
-        option.textContent = `${c.titre} - Complet`;
-        option.disabled = true;
+        checkbox.disabled = true;
+        label.append(
+          checkbox,
+          ` ${c.titre} - Complet`
+        );
       } else {
-        option.textContent =
-          `${c.titre} - ${c.prix} MAD - ${15 - nombreInscrits} places restantes`;
+        label.append(
+          checkbox,
+          ` ${c.titre} - ${c.prix} MAD - ${15 - nombreInscrits} places restantes`
+        );
       }
 
-      selectCours.appendChild(option);
+      containerCours.appendChild(label);
     });
   });
 
-  // Validation de la sélection des cours
-  selectCours.addEventListener("change", () => {
-    const selection = Array.from(selectCours.selectedOptions)
-      .filter(option => !option.disabled);
+  // Validation des Checkbox
+  containerCours.addEventListener("change", () => {
+    const coursSelectionnes = containerCours.querySelectorAll(
+      ".checkbox-cours:checked"
+    );
 
-    if (selection.length > 0) {
+    if (coursSelectionnes.length > 0) {
       afficherMessage(
         "erreur-cours",
         "✓ Cours sélectionné(s)",
         "valide"
       );
-
-      selectCours.classList.remove("input-invalide");
-      selectCours.classList.add("input-valide");
     } else {
-      afficherMessage("erreur-cours", "", "erreur");
-      selectCours.classList.remove("input-valide", "input-invalide");
+      afficherMessage(
+        "erreur-cours",
+        "",
+        "erreur"
+      );
     }
   });
 
@@ -250,18 +242,14 @@ const page = document.getElementById("formulaire");
         "erreur"
       );
 
-      niveau.classList.remove("input-valide");
       niveau.classList.add("input-invalide");
-
       formulaireValide = false;
     }
 
-    // Récupérer les cours sélectionnés
+    // Récupérer les Checkbox cochées
     const coursSelectionnes = Array.from(
-      selectCours.selectedOptions
-    )
-      .filter(option => !option.disabled)
-      .map(option => Number(option.value));
+      containerCours.querySelectorAll(".checkbox-cours:checked")
+    ).map(checkbox => Number(checkbox.value));
 
     // Vérifier les cours
     if (coursSelectionnes.length === 0) {
@@ -271,7 +259,6 @@ const page = document.getElementById("formulaire");
         "erreur"
       );
 
-      selectCours.classList.add("input-invalide");
       formulaireValide = false;
     }
 
@@ -373,9 +360,9 @@ const page = document.getElementById("formulaire");
 
     // Réinitialiser le formulaire
     form.reset();
-    selectCours.innerHTML = "";
+    containerCours.innerHTML = "";
 
-    document.querySelectorAll(".erreur").forEach(element => {
+    form.querySelectorAll(".erreur, .valide").forEach(element => {
       element.textContent = "";
     });
 
