@@ -4,7 +4,7 @@ import { regexNom, regexTelephone } from "./validation.js";
 import { renderTable } from "./inscription.js";
 
 export function afficherFormulaire() {
-  const page = document.getElementById("pageContent");
+const page = document.getElementById("formulaire");
 
   if (document.getElementById("formInscription")) return;
 
@@ -59,14 +59,14 @@ export function afficherFormulaire() {
   const niveau = form.querySelector("#niveau");
   const selectCours = form.querySelector("#cours");
 
-  // Récupérer les inscriptions
+  // Récupérer les inscriptions depuis localStorage
   function getInscriptions() {
     return JSON.parse(localStorage.getItem("inscriptions")) || [];
   }
 
   // Afficher les messages
   function afficherMessage(id, message, type) {
-    const element = document.getElementById(id);
+    const element = form.querySelector(`#${id}`);
 
     element.textContent = message;
     element.className = type;
@@ -77,9 +77,14 @@ export function afficherFormulaire() {
     const valeur = input.value.trim();
 
     if (valeur === "") {
-      afficherMessage(erreurId, "", "erreur");
+      afficherMessage(
+        erreurId,
+        "Ce champ est obligatoire.",
+        "erreur"
+      );
 
-      input.classList.remove("input-valide", "input-invalide");
+      input.classList.remove("input-valide");
+      input.classList.add("input-invalide");
 
       return false;
     }
@@ -150,33 +155,63 @@ export function afficherFormulaire() {
     afficherMessage("erreur-niveau", "", "erreur");
     afficherMessage("erreur-cours", "", "erreur");
 
+    selectCours.classList.remove("input-valide", "input-invalide");
+
+    if (niveau.value === "") {
+      niveau.classList.remove("input-valide", "input-invalide");
+      return;
+    }
+
+    niveau.classList.remove("input-invalide");
+    niveau.classList.add("input-valide");
+
     const coursDisponibles = courses.filter(
       c => c.niveau === niveau.value
     );
+
+    const inscriptions = getInscriptions();
 
     coursDisponibles.forEach(c => {
       const option = document.createElement("option");
 
       option.value = c.id;
 
-      if (c.places <= 0) {
+      const nombreInscrits = inscriptions.filter(
+        inscriptionExistante =>
+          inscriptionExistante.cours.some(
+            id => Number(id) === Number(c.id)
+          )
+      ).length;
+
+      if (nombreInscrits >= 15) {
         option.textContent = `${c.titre} - Complet`;
         option.disabled = true;
       } else {
         option.textContent =
-          `${c.titre} - ${c.prix} MAD - ${c.places} places`;
+          `${c.titre} - ${c.prix} MAD - ${15 - nombreInscrits} places restantes`;
       }
 
       selectCours.appendChild(option);
     });
-
-    niveau.classList.add("input-valide");
   });
 
-  // Retirer le style de validation du niveau
-  niveau.addEventListener("change", () => {
-    if (niveau.value === "") {
-      niveau.classList.remove("input-valide");
+  // Validation de la sélection des cours
+  selectCours.addEventListener("change", () => {
+    const selection = Array.from(selectCours.selectedOptions)
+      .filter(option => !option.disabled);
+
+    if (selection.length > 0) {
+      afficherMessage(
+        "erreur-cours",
+        "✓ Cours sélectionné(s)",
+        "valide"
+      );
+
+      selectCours.classList.remove("input-invalide");
+      selectCours.classList.add("input-valide");
+    } else {
+      afficherMessage("erreur-cours", "", "erreur");
+      selectCours.classList.remove("input-valide", "input-invalide");
     }
   });
 
@@ -207,30 +242,40 @@ export function afficherFormulaire() {
 
     let formulaireValide = true;
 
+    // Vérifier le niveau
     if (niveau.value === "") {
       afficherMessage(
         "erreur-niveau",
-        "Choisir un niveau.",
+        "Veuillez choisir un niveau.",
         "erreur"
       );
+
+      niveau.classList.remove("input-valide");
+      niveau.classList.add("input-invalide");
+
       formulaireValide = false;
     }
 
+    // Récupérer les cours sélectionnés
     const coursSelectionnes = Array.from(
       selectCours.selectedOptions
     )
       .filter(option => !option.disabled)
       .map(option => Number(option.value));
 
+    // Vérifier les cours
     if (coursSelectionnes.length === 0) {
       afficherMessage(
         "erreur-cours",
-        "Choisir au moins un cours.",
+        "Veuillez choisir au moins un cours.",
         "erreur"
       );
+
+      selectCours.classList.add("input-invalide");
       formulaireValide = false;
     }
 
+    // Vérifier tous les champs
     if (
       !nomValide ||
       !prenomValide ||
@@ -263,22 +308,29 @@ export function afficherFormulaire() {
         "Cet élève est déjà inscrit à un de ces cours.",
         "erreur"
       );
+
       return;
     }
 
-    // Vérifier les places disponibles
+    // Vérifier la capacité maximale de 15 élèves
     const coursComplets = coursSelectionnes.some(id => {
-      const coursTrouve = courses.find(c => c.id === id);
+      const nombreInscrits = inscriptions.filter(
+        inscriptionExistante =>
+          inscriptionExistante.cours.some(
+            coursId => Number(coursId) === Number(id)
+          )
+      ).length;
 
-      return !coursTrouve || coursTrouve.places <= 0;
+      return nombreInscrits >= 15;
     });
 
     if (coursComplets) {
       afficherMessage(
         "erreur-cours",
-        "Un cours sélectionné est complet.",
+        "Ce groupe a atteint sa capacité maximale de 15 élèves.",
         "erreur"
       );
+
       return;
     }
 
