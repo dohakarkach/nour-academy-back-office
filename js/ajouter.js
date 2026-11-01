@@ -121,7 +121,7 @@ export function afficherFormulaire() {
   });
 
   // Remplir les niveaux automatiquement
-  const niveaux = [...new Set(courses.map(c => c.niveau))];
+const niveaux = [...new Set(inscription.map(i => i.niveau))];
 
   niveaux.forEach(niveauCours => {
     const option = document.createElement("option");
@@ -131,7 +131,14 @@ export function afficherFormulaire() {
 
     niveau.appendChild(option);
   });
-
+const groupesCours = {
+  "Primaire": [1, 2],
+  "Collège": [3, 4, 5, 6, 7],
+  "Tronc commun": [8, 9, 10],
+  "1re Bac": [11, 12, 13],
+  "2e Bac": [16, 17, 18],
+  "Lycée": [14, 15]
+};
   // Afficher les cours selon le niveau choisi
   niveau.addEventListener("change", () => {
     containerCours.innerHTML = "";
@@ -147,9 +154,11 @@ export function afficherFormulaire() {
     niveau.classList.remove("input-invalide");
     niveau.classList.add("input-valide");
 
-    const coursDisponibles = courses.filter(
-      c => c.niveau === niveau.value
-    );
+    const idsCours = groupesCours[niveau.value] || [];
+
+const coursDisponibles = courses.filter(
+  c => idsCours.includes(Number(c.id))
+);
 
     const inscriptions = getInscriptions();
 

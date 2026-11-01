@@ -60,7 +60,7 @@ export function renderTable() {
 
     const resultats = [];
 
-    inscription.forEach((inscription) => {
+    inscriptionsSauvegardees.forEach((inscription) => {
       const nom = inscription.eleve.toLowerCase();
       const telephone = inscription.telephone.toLowerCase();
 
