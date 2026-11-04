@@ -1,4 +1,4 @@
-import { courses, inscription } from "./data.js";
+import { courses, inscription, setInscription } from "./data.js";
 import { regexNom, regexTelephone } from "./validation.js";
 import { renderTable } from "./inscription.js";
 
@@ -304,14 +304,13 @@ export function afficherFormulaire() {
     };
 
     inscriptions.push(nouvelleInscription);
+    setInscription(inscriptions);
 
     localStorage.setItem("inscriptions", JSON.stringify(inscriptions));
 
-    const ancienTableau = document.querySelector(".inscriptions-page");
+    const ancienTableau = document.querySelector("#table");
 
-    if (ancienTableau) {
-      ancienTableau.replaceWith(renderTable());
-    }
+    ancienTableau.replaceWith(renderTable());
 
     alert("Inscription ajoutée avec succès !");
 
@@ -325,5 +324,7 @@ export function afficherFormulaire() {
     form.querySelectorAll("input, select").forEach((element) => {
       element.classList.remove("input-valide", "input-invalide");
     });
+
+
   });
 }

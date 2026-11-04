@@ -187,8 +187,6 @@ function confirmerLigne(line) {
     }
   }
 
-  // lets check if the checked courses have enough places available. each course has a maximum of 15 places available. If the number of inscriptions for a course is greater than or equal to 15, then the course is full and cannot be selected. lets generate this check by counting the number of inscriptions for each course and comparing it to 15. If the number of inscriptions for a course is greater than or equal to 15, then the course is full and cannot be selected. we need to exclude the current inscription from the count, so that we can update it without triggering the full course alert. we can do this by filtering the inscription array to exclude the current inscription based on its numero.
-
   let full = false;
 
   checkedCourses.forEach((course) => {
@@ -204,8 +202,6 @@ function confirmerLigne(line) {
   });
 
   if (full) return;
-
-  //all checks passed, now we can update the inscription data and localStorage
 
   const numero = cells[0].textContent;
   const index = inscription.findIndex(
