@@ -1,3 +1,6 @@
+
+console.log("APP JS fonctionne");
+import { afficherFormulaire } from "./ajouter.js";
 import { renderDashboard } from "./dashboard.js";
 import { renderTable } from "./inscription.js";
 import { afficherFormulaire } from "./ajouter.js";

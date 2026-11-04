@@ -148,6 +148,10 @@ export function afficherFormulaire() {
     const coursDisponibles = courses.filter((c) =>
       idsCours.includes(Number(c.id)),
     );
+  });
+
+  // Remplir les niveaux automatiquement
+  const niveaux = [...new Set(courses.map(c => c.niveau))];
 
     const inscriptions = getInscriptions();
 

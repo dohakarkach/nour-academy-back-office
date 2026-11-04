@@ -178,7 +178,7 @@ export let inscription = [
     cours: [3, 7, 4],
     telephone: "0612345678",
     statut: "Validée",
-    date: "2026-10-20"
+    date: "2026-10-20",
   },
   {
     numero: "INS-002",
@@ -196,7 +196,7 @@ export let inscription = [
     cours: [17, 16],
     telephone: "0634567890",
     statut: "Payée",
-    date: "2026-10-21"
+    date: "2026-10-21",
   },
   {
     numero: "INS-004",
@@ -205,7 +205,7 @@ export let inscription = [
     cours: [6, 7],
     telephone: "0645678901",
     statut: "Validée",
-    date: "2026-10-21"
+    date: "2026-10-21",
   },
   {
     numero: "INS-005",
@@ -223,7 +223,7 @@ export let inscription = [
     cours: [11, 13],
     telephone: "0667890123",
     statut: "Validée",
-    date: "2026-10-22"
+    date: "2026-10-22",
   },
   {
     numero: "INS-007",
@@ -232,7 +232,7 @@ export let inscription = [
     cours: [8, 9, 10],
     telephone: "0678901234",
     statut: "Payée",
-    date: "2026-10-22"
+    date: "2026-10-22",
   },
   {
     numero: "INS-008",
@@ -241,7 +241,7 @@ export let inscription = [
     cours: [3, 6, 7],
     telephone: "0689012345",
     statut: "Validée",
-    date: "2026-10-22"
+    date: "2026-10-22",
   },
   {
     numero: "INS-009",
@@ -277,7 +277,7 @@ export let inscription = [
     cours: [15],
     telephone: "0622233344",
     statut: "Validée",
-    date: "2026-10-24"
+    date: "2026-10-24",
   },
   {
     numero: "INS-013",
@@ -286,7 +286,7 @@ export let inscription = [
     cours: [1, 2],
     telephone: "0633344455",
     statut: "Payée",
-    date: "2026-10-24"
+    date: "2026-10-24",
   },
   {
     numero: "INS-014",
@@ -295,7 +295,7 @@ export let inscription = [
     cours: [8, 10],
     telephone: "0644455566",
     statut: "Validée",
-    date: "2026-10-24"
+    date: "2026-10-24",
   },
   {
     numero: "INS-015",
@@ -313,7 +313,7 @@ export let inscription = [
     cours: [3, 5, 7],
     telephone: "0666677788",
     statut: "Validée",
-    date: "2026-10-25"
+    date: "2026-10-25",
   },
   {
     numero: "INS-017",
@@ -331,7 +331,7 @@ export let inscription = [
     cours: [11, 13, 15],
     telephone: "0688899900",
     statut: "Payée",
-    date: "2026-10-26"
+    date: "2026-10-26",
   },
   {
     numero: "INS-019",
@@ -340,7 +340,7 @@ export let inscription = [
     cours: [14, 17, 18, 16],
     telephone: "0699900011",
     statut: "Validée",
-    date: "2026-10-26"
+    date: "2026-10-26",
   },
   {
     numero: "INS-020",

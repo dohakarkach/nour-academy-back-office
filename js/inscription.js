@@ -56,6 +56,10 @@ export function renderTable() {
     sessionStorage.setItem("statutFiltre", statutChoisi);
     sessionStorage.setItem("triFiltre", triChoisi);
 
+    // Lire les dernières inscriptions depuis localStorage
+    const inscriptionsSauvegardees =
+      JSON.parse(localStorage.getItem("inscriptions")) || [];
+
     const resultats = [];
 
     inscription.forEach((inscription) => {
@@ -89,6 +93,8 @@ export function renderTable() {
       if (triChoisi === "date-desc") {
         return b.date.localeCompare(a.date);
       }
+
+      return 0;
     });
 
     tableBody.innerHTML = "";
