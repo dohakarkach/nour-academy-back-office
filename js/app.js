@@ -1,6 +1,6 @@
 import { renderDashboard } from "./dashboard.js";
 import { renderTable } from "./inscription.js";
-import { afficherFormulaire, verifierFormulaire } from "./ajouter.js";
+import { afficherFormulaire } from "./ajouter.js";
 import { deleteListeners } from "./supprimer.js";
 import { editListeners } from "./modifier.js";
 
@@ -28,12 +28,10 @@ leftArrow.addEventListener("click", () => {
 
 const dashboard = document.querySelector("#dashboard");
 const table = document.querySelector("#table");
-const formulaire = document.querySelector("#formulaire");
 
 dashboard.innerHTML = renderDashboard();
 table.appendChild(renderTable());
-formulaire.appendChild(afficherFormulaire());
-verifierFormulaire();
+afficherFormulaire();
 
 const navigationLinks = Array.from(
   document.querySelectorAll(".nav-group a[href^='#']"),
