@@ -1,4 +1,4 @@
-import { courses, inscription } from "./data.js";
+import { courses, inscription, setInscription } from "./data.js";
 import { regexNom, regexTelephone } from "./validation.js";
 import { renderTable } from "./inscription.js";
 
@@ -123,10 +123,9 @@ export function afficherFormulaire() {
   const groupesCours = {
     Primaire: [1, 2],
     Collège: [3, 4, 5, 6, 7],
-    "Tronc commun": [8, 9, 10],
-    "1re Bac": [11, 12, 13],
-    "2e Bac": [16, 17, 18],
-    Lycée: [14, 15],
+    "Tronc commun": [8, 9, 10, 14, 15],
+    "1re Bac": [11, 12, 13, 14, 15],
+    "2e Bac": [16, 17, 18, 14, 15],
   };
 
   niveau.addEventListener("change", () => {
@@ -148,10 +147,6 @@ export function afficherFormulaire() {
     const coursDisponibles = courses.filter((c) =>
       idsCours.includes(Number(c.id)),
     );
-  });
-
-  // Remplir les niveaux automatiquement
-  const niveaux = [...new Set(courses.map(c => c.niveau))];
 
     const inscriptions = getInscriptions();
 
@@ -309,14 +304,13 @@ export function afficherFormulaire() {
     };
 
     inscriptions.push(nouvelleInscription);
+    setInscription(inscriptions);
 
     localStorage.setItem("inscriptions", JSON.stringify(inscriptions));
 
-    const ancienTableau = document.querySelector(".inscriptions-page");
+    const ancienTableau = document.querySelector("#table");
 
-    if (ancienTableau) {
-      ancienTableau.replaceWith(renderTable());
-    }
+    ancienTableau.replaceWith(renderTable());
 
     alert("Inscription ajoutée avec succès !");
 
@@ -330,5 +324,7 @@ export function afficherFormulaire() {
     form.querySelectorAll("input, select").forEach((element) => {
       element.classList.remove("input-valide", "input-invalide");
     });
+
+
   });
 }

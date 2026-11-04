@@ -45,7 +45,6 @@ function modifierLigne(line) {
     return;
   }
 
-
   const currentNiveau = cells[2].textContent.trim();
   const currentCours = String(cells[3].innerHTML).trim().split("<br><br>");
   const currentStatut = cells[5].textContent.trim();
@@ -132,8 +131,6 @@ function confirmerLigne(line) {
 
   const niveauSelect = cells[2].firstChild;
 
-  // the niveauSelect value must be one of the niveauOptions array
-
   if (!niveauOptions.includes(niveauSelect.value)) {
     alert("Le niveau scolaire n'est pas valide.");
     return;
@@ -189,6 +186,22 @@ function confirmerLigne(line) {
       }
     }
   }
+
+  let full = false;
+
+  checkedCourses.forEach((course) => {
+    const courseId = idCourses(niveauSelect, [course])[0];
+    const inscriptionsForCourse = inscription.filter((insc) =>
+      insc.cours.includes(courseId) && insc.numero !== cells[0].textContent,
+    );
+    if (inscriptionsForCourse.length >= 15) {
+      alert(`Le cours ${course} est complet.`);
+      full = true;
+      return;
+    }
+  });
+
+  if (full) return;
 
   const numero = cells[0].textContent;
   const index = inscription.findIndex(
