@@ -1,6 +1,9 @@
 import { courses, inscription, setInscription } from "./data.js";
 import { regexNom, regexTelephone } from "./validation.js";
 import { renderTable } from "./inscription.js";
+import { deleteListeners } from "./supprimer.js";
+import { editListeners } from "./modifier.js";
+import { renderDashboard } from "./dashboard.js";
 
 export function afficherFormulaire() {
   const page = document.getElementById("formulaire");
@@ -308,9 +311,13 @@ export function afficherFormulaire() {
 
     localStorage.setItem("inscriptions", JSON.stringify(inscriptions));
 
+    const ancienDashboard = document.querySelector("#dashboard");
     const ancienTableau = document.querySelector("#table");
 
+    ancienDashboard.innerHTML = renderDashboard();
     ancienTableau.replaceWith(renderTable());
+    deleteListeners();
+    editListeners();
 
     alert("Inscription ajoutée avec succès !");
 
@@ -324,7 +331,5 @@ export function afficherFormulaire() {
     form.querySelectorAll("input, select").forEach((element) => {
       element.classList.remove("input-valide", "input-invalide");
     });
-
-
   });
 }
